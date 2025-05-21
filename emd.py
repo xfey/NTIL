@@ -15,7 +15,6 @@ class NTIL(nn.Module):
                  tokenizer=None, 
                  batch_size=-1, 
                  ntil_lambda=0.3,
-                 digit_alpha=1.0,
                  digit_exp=1.0,
                  ):
         super().__init__()
@@ -25,7 +24,6 @@ class NTIL(nn.Module):
         self.num_vocab = 0                  # temp saving
 
         self.ntil_lambda = ntil_lambda      # overall lambda
-        self.digit_alpha = digit_alpha      # emd loss (w_dist)
         self.digit_exp = digit_exp          # exp increase for higher digit position
 
         self.device = None
@@ -134,11 +132,7 @@ class NTIL(nn.Module):
                 y_batch = y[batch_idx]  # [batch_size]
                 # Process each batch
                 emd_diff = self.compute_digit_wdist_loss(x_batch, y_batch)
-
-                # mixed loss
-                mix_diff = self.digit_alpha * emd_diff
-            
-                batch_losses.append(mix_diff)
+                batch_losses.append(emd_diff)
         except Exception as e:
             print("Error when calculating loss:", e)
             return self.zero_tensor
@@ -217,7 +211,6 @@ if __name__ == "__main__":
         tokenizer=tokenizer,
         batch_size=BS,
         ntil_lambda=0.3,
-        digit_alpha=1.0,
         digit_exp=1.2,
     )
 

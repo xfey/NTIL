@@ -34,12 +34,10 @@ Parameters for EMD:
 - **tokenizer**: HuggingFace tokenizer for identifying digit tokens
 - **batch_size**: Batch size for processing (to avoid number leakage between batches)
 - **ntil_lambda**: Overall weight of EMD relative to MLE loss
-- **digit_alpha**: Weight for digit-wise EMD loss component
 - **digit_exp**: Exponential factor for position-based weighting
 
 Minimal parameters:
 - **tokenizer**: HuggingFace tokenizer for identifying digit tokens
-- **ntil_lambda**: Overall weight of EMD relative to MLE loss
 
 ## Usage
 
