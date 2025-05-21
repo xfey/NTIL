@@ -10,7 +10,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-class NTIL(nn.Module):
+class EMD(nn.Module):
     def __init__(self, 
                  tokenizer=None, 
                  batch_size=-1, 
@@ -207,7 +207,7 @@ if __name__ == "__main__":
     # [True, False, True, True, True, True, True, True, True, False, True, True, False, False, True, False, True, False, True, False]
 
     # Initialize loss function
-    digit_loss = NTIL(
+    digit_loss = EMD(
         tokenizer=tokenizer,
         batch_size=BS,
         ntil_lambda=0.3,
